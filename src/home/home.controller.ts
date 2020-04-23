@@ -7,7 +7,7 @@ export class HomeController {
   @Get()
   public homePage() {
     return {
-      name: 'Aginix Technologies Co., Ltd TTT'
+      name: 'Aginix Technologies Co., Ltd.'
     }
   }
 }

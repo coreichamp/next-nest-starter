@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build:clean": "rimraf .next",
+    "build:clean": "rimraf .next dist",
     "build:ui": "next build",
     "build:public": "cp -R ./public .next/public",
     "build:server": "nest build --path tsconfig.server.json",
@@ -14,7 +14,6 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"pages/**/*.ts\" \"pages/**/*.tsx\"",
     "start": "cross-env NODE_ENV=production node dist/main.js",
     "start:dev": "nest build --webpack --webpackPath webpack-hmr.config.js --path tsconfig.server.json",
-    "start:dev2": "NODE_ENV=development nest start --watch --path tsconfig.server.json",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main.js",
     "lint": "eslint \"{src,test}/**/*.ts\" --fix",
