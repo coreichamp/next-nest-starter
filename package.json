@@ -13,10 +13,11 @@
     "build": "yarn build:clean && yarn build:ui && yarn build:server && yarn build:public",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"pages/**/*.ts\" \"pages/**/*.tsx\"",
     "start": "cross-env NODE_ENV=production node dist/main.js",
-    "start:dev": "NODE_ENV=development nest start --watch --path tsconfig.server.json",
+    "start:dev": "nest build --webpack --webpackPath webpack-hmr.config.js --path tsconfig.server.json",
+    "start:dev2": "NODE_ENV=development nest start --watch --path tsconfig.server.json",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main.js",
-    "lint": "eslint \"{src,pages,test}/**/*.ts\" --fix",
+    "lint": "eslint \"{src,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
@@ -83,12 +84,14 @@
     "jest": "^25.1.0",
     "lint-staged": "^10.1.7",
     "prettier": "^1.19.1",
+    "start-server-webpack-plugin": "^2.2.5",
     "supertest": "^4.0.2",
     "ts-jest": "25.2.1",
     "ts-loader": "^7.0.1",
     "ts-node": "^8.6.2",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^3.7.4"
+    "typescript": "^3.7.4",
+    "webpack-node-externals": "^1.7.2"
   },
   "husky": {
     "hooks": {

@@ -4,6 +4,8 @@ import { RenderService } from 'nest-next';
 
 import { AppModule } from './app.module';
 
+declare const module: any;
+
 async function bootstrap() {
   const server = await NestFactory.create(AppModule);
 
@@ -27,5 +29,10 @@ async function bootstrap() {
   });
 
   await server.listen(process.env.PORT || 3000);
+
+  if (module.hot) {
+    module.hot.accept();
+    module.hot.dispose(() => server.close());
+  }
 }
 bootstrap();
