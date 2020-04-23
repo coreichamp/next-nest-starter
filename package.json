@@ -1,0 +1,124 @@
+{
+  "name": "app",
+  "version": "0.0.0",
+  "description": "",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "build:clean": "rimraf .next",
+    "build:ui": "next build",
+    "build:public": "cp -R ./public .next/public",
+    "build:server": "nest build --path tsconfig.server.json",
+    "build": "yarn build:clean && yarn build:ui && yarn build:server && yarn build:public",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"pages/**/*.ts\" \"pages/**/*.tsx\"",
+    "start": "cross-env NODE_ENV=production node dist/main.js",
+    "start:dev": "NODE_ENV=development nest start --watch --path tsconfig.server.json",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main.js",
+    "lint": "eslint \"{src,pages,test}/**/*.ts\" --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.9.11",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.50",
+    "@nestjs/common": "^7.0.0",
+    "@nestjs/config": "^0.4.0",
+    "@nestjs/core": "^7.0.0",
+    "@nestjs/passport": "^7.0.0",
+    "@nestjs/platform-express": "^7.0.0",
+    "@nestjs/serve-static": "^2.1.0",
+    "@next/bundle-analyzer": "^9.3.5",
+    "axios": "^0.19.2",
+    "babel-plugin-import": "^1.13.0",
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.11.1",
+    "cls-hooked": "^4.2.2",
+    "compression": "^1.7.4",
+    "cross-env": "^7.0.2",
+    "express-rate-limit": "^5.1.1",
+    "file-saver": "^2.0.2",
+    "lodash": "^4.17.15",
+    "nest-next": "^9.2.0",
+    "next": "^9.3.2",
+    "next-compose-plugins": "^2.2.0",
+    "passport": "^0.4.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-hook-form": "^5.3.1",
+    "react-hook-form-input": "^1.1.10",
+    "react-query": "^1.1.7",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "rxjs": "^6.5.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@nestjs/cli": "^7.0.0",
+    "@nestjs/schematics": "^7.0.0",
+    "@nestjs/testing": "^7.0.0",
+    "@types/cls-hooked": "^4.3.0",
+    "@types/compression": "^1.7.0",
+    "@types/express": "^4.17.3",
+    "@types/express-rate-limit": "^5.0.0",
+    "@types/file-saver": "^2.0.1",
+    "@types/jest": "25.1.4",
+    "@types/lodash": "^4.14.149",
+    "@types/node": "^13.9.1",
+    "@types/react": "^16.9.26",
+    "@types/react-query": "^1.1.1",
+    "@types/supertest": "^2.0.8",
+    "@typescript-eslint/eslint-plugin": "^2.23.0",
+    "@typescript-eslint/parser": "^2.23.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "husky": "^4.2.5",
+    "jest": "^25.1.0",
+    "lint-staged": "^10.1.7",
+    "prettier": "^1.19.1",
+    "supertest": "^4.0.2",
+    "ts-jest": "25.2.1",
+    "ts-loader": "^7.0.1",
+    "ts-node": "^8.6.2",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.7.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "yarn run prettier --write",
+      "yarn lint",
+      "git add"
+    ],
+    "*.md": [
+      "yarn run prettier --write",
+      "git add"
+    ]
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  }
+}

@@ -1,0 +1,8 @@
+.next
+dist
+node_modules
+.vscode
+test
+nodemon*.json
+.dockerignore
+.env*
