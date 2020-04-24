@@ -28,6 +28,7 @@
     "paths": {
       // Client Alias
       "~/*": ["ui/*"],
+      "~public/*": ["public/*"],
 
       // Server Alias
       "@/*": ["src/*"],
