@@ -37,29 +37,3 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-
-## How to use
-
-### Excel file
-
-#### POST to /api/excel/render
-
-```
-{
-  "data": [<DATA>],
-  "filename": "filename",
-  "type": "xlsx"
-}
-```
-
-### Template
-
-#### POST to /api/templates/:templateId/render
-
-```
-{
-  "data": <DATA>,
-  "filename": "filename",
-  "format": "pdf"
-}
-```
