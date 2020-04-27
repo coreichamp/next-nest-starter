@@ -1,11 +1,21 @@
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
-import { AppProps, AppContext } from 'next/app';
+import { AppProps } from 'next/app';
 
 import { lightTheme, darkTheme, ThemeContext, useThemeType, ThemeContextType } from '~/theme';
 import React, { useEffect, useState, useMemo } from 'react';
 import Head from 'next/head';
 import Root from '~/layout/Root';
+
+import Router from 'next/router'
+
+import * as gtag from '~/gtag'
+
+if (gtag.GA_TRACKING_ID) {
+  Router.events.on('routeChangeComplete', url => gtag.pageview(url))
+} else {
+  console.warn('[Application]', 'The app has no GA_TRACKING_ID. You can set GA_TRACKING_ID in `/ui/gtag.ts`')
+}
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [theme, toggleTheme] = useThemeType('auto');
