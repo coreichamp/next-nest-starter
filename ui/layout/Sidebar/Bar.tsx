@@ -1,4 +1,4 @@
-import { makeStyles, Drawer, IconButton, Hidden } from '@material-ui/core';
+import { makeStyles, Drawer, IconButton, Hidden, NoSsr } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
@@ -64,6 +64,7 @@ export const LeftSidebar: FC<Props> = ({ children, open, handleClose }) => {
   const container = typeof window  !== 'undefined' ? () => window.document.body : undefined;
 
   return (
+    <NoSsr>
   <nav>
     <Hidden smUp implementation="css">
       <Drawer
@@ -104,5 +105,6 @@ export const LeftSidebar: FC<Props> = ({ children, open, handleClose }) => {
 </Drawer>
     </Hidden>
     </nav>
+    </NoSsr>
   )
 }

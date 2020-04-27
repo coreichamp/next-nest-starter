@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx'
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { AppBar, Badge, CssBaseline, Toolbar, IconButton, Menu, MenuItem, Typography } from '@material-ui/core';
+import { AppBar, Badge, CssBaseline, Toolbar, IconButton, Menu, MenuItem, Typography, NoSsr } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -146,6 +146,7 @@ const TopNavbar = ({ handleOpen, open }: Props) => {
           [classes.appBarShift]: open,
         })}
       >
+        <NoSsr>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -191,9 +192,12 @@ const TopNavbar = ({ handleOpen, open }: Props) => {
             </IconButton>
           </div>
         </Toolbar>
+        </NoSsr>
       </AppBar>
+      <NoSsr>
       {renderMobileMenu}
       {renderMenu}
+      </NoSsr>
     </div>
   )
 }
