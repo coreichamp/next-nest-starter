@@ -1,7 +1,7 @@
 import React, { FC, useState, memo } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import TopNavbar from '../TopNavbar';
-import { LeftSidebar, SidebarContext } from '../Sidebar';
+import { LeftSidebar, SidebarContext, SidebarDivider, SidebarSpace } from '../Sidebar';
 import { CssBaseline } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -34,7 +34,10 @@ const Layout = memo(() => {
 
   return <SidebarContext.Provider value={sidebarOpen}>
     <TopNavbar open={sidebarOpen} handleOpen={handleOpen} />
-    <LeftSidebar open={sidebarOpen} handleClose={handleClose} />
+    <LeftSidebar open={sidebarOpen} handleClose={handleClose}>
+      <SidebarDivider />
+      <SidebarSpace />
+    </LeftSidebar>
   </SidebarContext.Provider>
 })
 

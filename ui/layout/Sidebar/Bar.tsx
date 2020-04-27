@@ -1,4 +1,6 @@
-import { makeStyles, Drawer, IconButton } from '@material-ui/core';
+import { makeStyles, Drawer, IconButton, Hidden } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 import React, { FC } from 'react';
 import { sidebarConfig } from './config';
@@ -28,12 +30,18 @@ const useStyles = makeStyles<AppTheme>(theme => ({
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(9) + 1,
     },
+    [theme.breakpoints.down('xs')]: {
+      width: 0,
+      borderRight: 'none'
+    }
   },
   toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: theme.spacing(0, 1),
+    [theme.breakpoints.up('xs')]: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: theme.spacing(0, 1),
+    },
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
@@ -50,8 +58,31 @@ type Props = {
 
 export const LeftSidebar: FC<Props> = ({ children, open, handleClose }) => {
   const classes = useStyles();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  
+  const container = typeof window  !== 'undefined' ? () => window.document.body : undefined;
 
-  return <Drawer
+  return (
+  <nav>
+    <Hidden smUp implementation="css">
+      <Drawer
+        variant="temporary"
+        onClose={handleClose}
+        classes={{
+          paper: classes.drawerOpen
+        }}
+        open={isMobile ? open : false}
+        container={container}
+        ModalProps={{
+          keepMounted: true // Better open performance on mobile.
+        }}
+      >
+        {children}
+      </Drawer>
+    </Hidden>
+    <Hidden xsDown implementation="css">
+    <Drawer
   variant="permanent"
   className={clsx(classes.drawer, {
     [classes.drawerOpen]: open,
@@ -71,4 +102,7 @@ export const LeftSidebar: FC<Props> = ({ children, open, handleClose }) => {
   </div>
   {children}
 </Drawer>
+    </Hidden>
+    </nav>
+  )
 }
