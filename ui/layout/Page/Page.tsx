@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useMemo } from 'react';
 import { PageTheme, pageTheme } from './PageThemeProvider';
 import { makeStyles } from '@material-ui/core';
 
 export const Theme = React.createContext<PageTheme>(pageTheme.home);
+export const DocumentTitle = React.createContext<[string, React.Dispatch<React.SetStateAction<string>>]>(['App', null]);
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -20,10 +21,14 @@ type Props = {
 };
 
 const Page: FC<Props> = ({ theme = pageTheme.home, children }) => {
+  const [title, setTitle] = useState('App')
   const classes = useStyles();
+
   return (
     <Theme.Provider value={theme}>
-      <div className={classes.root}>{children}</div>
+      <DocumentTitle.Provider value={[title, setTitle]}>
+        <div className={classes.root}>{children}</div>
+      </DocumentTitle.Provider>
     </Theme.Provider>
   );
 };

@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, FC } from 'react';
 
 export const sidebarConfig = {
   drawerWidthClosed: 64,

@@ -48,6 +48,7 @@ type PaletteAdditions = {
       default: string;
     };
   };
+  appbar: string;
 };
 
 export type AppPalette = Palette & PaletteAdditions;

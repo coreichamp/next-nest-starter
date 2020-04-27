@@ -16,7 +16,7 @@ export function createThemeOptions(palette: AppPaletteOptions): AppThemeOptions 
       },
     },
     typography: {
-      fontFamily: '"Helvetica Neue", Helvetica, Roboto, Arial, sans-serif',
+      fontFamily: 'Prompt, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif',
       h5: {
         fontWeight: 700,
       },
@@ -46,6 +46,11 @@ export function createThemeOptions(palette: AppPaletteOptions): AppThemeOptions 
 
 export function createThemeOverrides(theme: AppTheme): Overrides {
   return {
+    MuiAppBar: {
+      colorPrimary: {
+        backgroundColor: theme.palette.appbar,
+      },
+    },
     MuiTableRow: {
       // Alternating row backgrounds
       root: {

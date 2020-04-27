@@ -2,12 +2,18 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { AppProps, AppContext } from 'next/app';
 
-import { lightTheme } from '~/theme';
-import React, { useEffect } from 'react';
+import { lightTheme, darkTheme, ThemeContext, useThemeType, ThemeContextType } from '~/theme';
+import React, { useEffect, useState, useMemo } from 'react';
 import Head from 'next/head';
+import Root from '~/layout/Root';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [theme, toggleTheme] = useThemeType('auto');
+  const [isMounted, setIsMounted] = useState(false)
+  
   useEffect(() => {
+    setIsMounted(true)
+
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
@@ -15,17 +21,49 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   }, []);
 
+
+  const backstageTheme = useMemo(() => {
+    switch (theme) {
+      case 'light':
+        return lightTheme;
+      case 'dark':
+        return darkTheme;
+      default:
+        if (isMounted) {
+          if (!window.matchMedia) {
+            return lightTheme;
+          }
+          return window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? darkTheme
+            : lightTheme;
+        }
+        else {
+          return lightTheme;
+        }
+    }
+  }, [theme]);
+  
+
+  const themeContext: ThemeContextType = {
+    theme,
+    toggleTheme,
+  };
+
   return (
     <React.Fragment>
       <Head>
         <title>Next Nest Starter</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <ThemeProvider theme={lightTheme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <ThemeContext.Provider value={themeContext}>
+        <ThemeProvider theme={backstageTheme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <Root>
+            <Component {...pageProps} />
+          </Root>
+        </ThemeProvider>
+      </ThemeContext.Provider>
     </React.Fragment>
   );
 }

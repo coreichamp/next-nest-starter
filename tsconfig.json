@@ -17,24 +17,43 @@
     "emitDecoratorMetadata": true,
     "sourceMap": true,
     "skipLibCheck": true,
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "baseUrl": ".",
-    "typeRoots": ["node_modules/@types", "./typings"],
+    "typeRoots": [
+      "node_modules/@types",
+      "./typings"
+    ],
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "paths": {
-      // Client Alias
-      "~/*": ["ui/*"],
-      "~public/*": ["public/*"],
-
-      // Server Alias
-      "@/*": ["src/*"],
-      "@shared/*": ["shared/*"]
+      "~/*": [
+        "ui/*"
+      ],
+      "~public/*": [
+        "public/*"
+      ],
+      "@/*": [
+        "src/*"
+      ],
+      "@shared/*": [
+        "shared/*"
+      ]
     }
   },
-  "include": ["./pages/**/*", "./src/**/*", "./ui/**/*", "./shared/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "./pages/**/*",
+    "./src/**/*",
+    "./ui/**/*",
+    "./shared/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

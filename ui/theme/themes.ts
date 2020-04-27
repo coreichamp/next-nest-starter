@@ -55,6 +55,7 @@ export const lightTheme = createTheme({
   link: '#0A6EBE',
   gold: yellow.A700,
   sidebar: '#171717',
+  appbar: '#3f51b5',
 });
 
 export const darkTheme = createTheme({
@@ -95,4 +96,5 @@ export const darkTheme = createTheme({
   link: '#0A6EBE',
   gold: yellow.A700,
   sidebar: '#424242',
+  appbar: '#323247',
 });
