@@ -1,12 +1,11 @@
 import React, { createContext, useContext } from 'react';
-import { FieldValues, FormContextValues, OnSubmit } from 'react-hook-form';
+import { FieldValues, FormContextValues } from 'react-hook-form';
 import { DevTool } from 'react-hook-form-devtools';
 
 export const FormContext = createContext<Partial<FormContextValues>>(null as any);
 
 export interface Props {
   form: FormContextValues<FieldValues>;
-  // onSubmit?: <T = any>(callback: any) => Promise<T> | void;
   onSubmit?: (e?: React.BaseSyntheticEvent) => Promise<void>;
 }
 
